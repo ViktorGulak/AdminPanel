@@ -1,0 +1,32 @@
+@import url('https://fonts.googleapis.com/css2?family=Golos+Text&family=Lato&family=Tilt+Prism&display=swap');
+@import "../../styleVariables.scss";
+
+.avatar-wrapper{
+    margin-right: 95px;
+    font-family: 'Golos Text', sans-serif;
+    color: $blue;
+    font-size: 14px;
+    &>figure{
+        background: inherit;
+    }
+
+    &>.popover-container{
+        width: 275px;
+    }
+    & .exit-link{
+        margin-left: 5px;
+    }
+
+    & a{
+        text-decoration: none;
+        font-size: 14px;
+        box-shadow: none;
+        color: $blue;
+        transition: 350ms;
+
+            &:hover{
+                color: $darkBlue;
+            }
+    }
+}
+

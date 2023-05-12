@@ -1,0 +1,12 @@
+{
+    "short_name": "Rosvodokanal",
+    "name": "Rosvodokanal",
+    "description": "Rosvodokanal",
+    "icons": [
+      {
+        "src": "favicon.ico",
+        "sizes": "100x100",
+        "type": "image/png"
+      }
+    ]
+}

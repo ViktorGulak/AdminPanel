@@ -1,0 +1,28 @@
+.main-container{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    overflow: hidden;
+}
+
+.client-general-app{
+    height: 100%;
+    width: 100%;
+    display: inherit;
+    justify-content: center;
+    align-items: flex-start;
+    overflow: hidden;
+    background-image: url("../../assets/appbackground.png");
+    background-position: center;
+    background-size: cover;
+}
+
+
+
+.user-page{
+    display: flex;
+    height: 100%;
+    width: 100%;
+    justify-content: flex-end ;
+    overflow: hidden;
+}

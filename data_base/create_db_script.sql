@@ -1,0 +1,1 @@
+-- create database vodokanal_db;

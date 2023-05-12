@@ -1,0 +1,10 @@
+@import "../../../styleVariables.scss";
+
+.search-input{
+    border-color: $blue;
+        height: 39px;
+        font-size: 18px;
+        &:focus{
+            border-color: $darkBlue;
+        } 
+}

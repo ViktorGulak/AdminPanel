@@ -1,0 +1,64 @@
+@import "../../styleVariables.scss";
+
+.moving-container{
+    width: 91vw !important;
+    transition: 650ms !important;
+}
+.user-content-wrapper{
+    margin-top: 50px;
+    position: relative;
+    width: 73vw;
+    height: 83vh;
+    margin-right: 60px;
+    overflow: hidden;
+    transition: 650ms;
+    
+
+    &>h2, &>div.loader{
+        text-align: center;
+    }
+
+    &>.add-user-btn{
+        position: absolute;
+        right: 0px;
+        font-size: .8rem;
+        background: $blue !important;
+        border-color: $blue !important;
+        transition: 350ms;
+        width: 100px;
+
+        &:hover{
+            background: $darkBlue !important;
+        }
+
+    }
+
+}
+
+.break-word-field{
+    word-break: break-all;
+}
+.jump-word-field{
+    word-break: normal;
+}
+.operation-field{
+    text-align: center;
+    align-items: center;
+    padding: 0;
+    text-align: center !important;
+	vertical-align: middle !important;
+
+    &>button{
+		margin-left: 10px;
+	}
+}
+.photo-field {
+    vertical-align: middle !important;
+    text-align: center !important;
+
+    & img{
+        width: 75%;
+        height: 75%;
+        border-radius: 30%;
+    }
+}

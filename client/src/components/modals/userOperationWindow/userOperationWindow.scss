@@ -1,0 +1,152 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
+@import "../../../styleVariables.scss";
+
+.user-modal{
+    max-height: 80vh;
+
+    &>.modal-header{
+        display: flex;
+        justify-content: center;
+        position: relative;
+        &>span{
+            color: $appTitle;
+            font-family: 'Lato', sans-serif;
+            font-size: 1.3rem;
+        }
+        &>.close-modal-btn{
+            position: absolute;
+            right: -10px;
+            top: 0;
+            border: none;
+            color: $grey;
+            background: inherit;
+            transition: 0.3s;
+            font-size: 1rem;
+            &:focus{
+                box-shadow: none;
+            }
+            &:hover{
+                color: $red;
+                transition: 0.3s;
+            }
+        }
+    }
+
+    &>.modal-body{
+       display: flex;
+       justify-content:space-between;
+       padding: 0;
+       overflow: hidden;
+       &>.left-input-container, &>.right-input-container{
+        width: 45%;
+        & label {
+            color: $grey;
+        }
+       }
+
+       & input, & select{
+            border-color: $blue;
+            font-size: 16px;
+
+            &:focus{
+                border-color: $darkBlue;
+            }    
+        }
+    
+        &>.enter-btn{
+            position: absolute;
+            right: 0px;
+            bottom: -65px;
+            font-size: .8rem;
+            background: $blue;
+            border-color: $blue;
+            transition: 350ms;
+            width: 100px;
+    
+            &:hover{
+                background: $darkBlue;
+            }
+        }    
+       
+    }
+
+    &>.add-btn{
+        align-self: flex-end;
+        margin: 15px 0px;
+        font-size: .8rem;
+        background: $blue !important;
+        border-color: $blue !important;
+        transition: 350ms;
+        width: 100px;
+
+        &:hover{
+            background: $darkBlue !important;
+        }
+    }
+
+    &>.edit-btn{
+        align-self: flex-end;
+        margin: 15px 0px;
+        font-size: .8rem;
+        width: 100px;
+    }
+
+    
+}
+
+.photo-elements{
+    display: flex;
+
+    &>.photo-name-viwer{
+        font-size: 1.2em;
+        margin-left: 0.5em;
+        color: $grey;
+        text-overflow: clip;
+    }
+}
+.photo-path-demonstrator{
+    background-color: #fff;
+    margin-left: 3px;
+}
+.input-file {
+	position: relative;
+	display: inline-block;
+}
+.input-file-btn {
+	position: relative;
+	display: inline-block;
+	cursor: pointer;
+	outline: none;
+	text-decoration: none;
+	vertical-align: middle;
+	color: rgb(255 255 255);
+	text-align: center;
+	border-radius: 25%;
+	background-color: $blue;
+	height: 40px;
+	padding: 6px 10px;
+	border: none;
+	transition: background-color 0.2s;
+}
+
+.input-file input[type=file] {
+	position: absolute;
+	z-index: -1;
+	opacity: 0;
+	display: block;
+	width: 0;
+	height: 0;
+}
+  
+/* Hover/active */
+.input-file:hover .input-file-btn {
+	background-color: $darkBlue;
+}
+.input-file:active .input-file-btn {
+	background-color: $darkBlue;
+}
+ 
+/* Disabled */
+.input-file input[type=file]:disabled + .input-file-btn {
+	background-color: #eee;
+}
