@@ -98,10 +98,12 @@
     display: flex;
 
     &>.photo-name-viwer{
-        font-size: 1.2em;
+        font-size: 1.1em;
         margin-left: 0.5em;
         color: $grey;
+        white-space: nowrap;
         text-overflow: clip;
+        padding-top: 4px;
     }
 }
 .photo-path-demonstrator{

@@ -4,11 +4,10 @@ import {addNewUser, changeUser} from "../../../redux/slices/userSlice"
 import  "./userOperationWindow.scss"
 
 export default function UserOperationWindow({isActive, setActive, isAddingOperation, userData}) { 
-    //const userPhotoPath = "./client/user_photo";
     const dispatch = useDispatch();
     const roleItem = ["Оператор", "Системный администратор", "Руководитель"];
-    let id, surname, name, patronymic, role, login, email, photo;
-    const // По дефолту все текстовые поля в модалке пустые эти значения мы укажем в value input окна добавления
+    let id, surname, name, patronymic, role, login, email, photo; // переменные для defaultValue input-ов
+    const // создаём ссылки для текстовых полей модалки
         surnameRef = useRef(), 
         nameRef = useRef(), 
         patronymicRef =useRef(),
@@ -26,19 +25,17 @@ export default function UserOperationWindow({isActive, setActive, isAddingOperat
         role = userData.current.role;   // данными из таблицы пользователей
         login = userData.current.login;
         email = userData.current.email;
-        photo = userData.current.photoPath;
+        photo = userData.current.photoPath.split("/").pop(); // из url получаем только имя фото
     } 
-    // Если путь фото есть, то вставляем его в качестве текущего значения в состояние,
-    // а сосотояние в текстовое полу photo это реализовано для окна изменения, если окно
-    // добавления, то в текстовое поля photo попадёт пустая строка
-    const [currentPhoto, setCurrentPhoto] = useState(photo ? photo : "");
+    // Если операция добавления, то фотографии нет, иначе вставляем имя фото, которое пришло из пользовательской таблице
+    const [currentPhoto, setCurrentPhoto] = useState(isAddingOperation ? "" : photo);
     let windowTitle = isAddingOperation ? "Добавление пользователя" : "Изменение пользователя";
-    const addUserHandler = (e) => {
+    const photoDeterminant = !currentPhoto ? "Фотографии нет" : (currentPhoto.name ? currentPhoto.name : currentPhoto);
+    const executeOperation = (e) => {
         e.preventDefault();
-        // При нажатии на кнопку добавить создаётся новый объект, куда переносятся все введённые 
+        // При нажатии на кнопку добавить создаётся новый объект FormData (так как работаем с фото), куда переносятся все введённые 
         // пользователем данные в окне добавления. Этот объект и будет отправлен на сервер
         const newUserData = new FormData();
-
         newUserData.append("surname", surnameRef.current.value);
         newUserData.append("name", nameRef.current.value);
         newUserData.append("patronymic", patronymicRef.current.value);
@@ -56,7 +53,6 @@ export default function UserOperationWindow({isActive, setActive, isAddingOperat
             setActive(!isActive);
         }
     }
-    
     return (
         <div className="modal-container user-modal">
             <div className="modal-header">
@@ -124,18 +120,18 @@ export default function UserOperationWindow({isActive, setActive, isAddingOperat
                                 <i className="icon icon-photo"></i>           
                                 </span>           
                             </label>
-                            <span className="photo-name-viwer">{!photo ? "Фотографии нет" : photo}</span>
+                            <span className="photo-name-viwer" title={photoDeterminant}>{ photoDeterminant }</span>
                         </div>     
                     </div>
                 </div>
             </div>
             {isAddingOperation ?
                 <button className="btn btn-primary add-btn"
-                    onClick={(e) => addUserHandler(e)}
+                    onClick={(e) => executeOperation(e)}
                 >Добавить</button>
                 :
                 <button className="btn btn-success edit-btn"
-                    onClick={(e) => addUserHandler(e)}
+                    onClick={(e) => executeOperation(e)}
                 >Изменить</button>
             }
         </div>

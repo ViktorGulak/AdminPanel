@@ -1,3 +1,4 @@
+const bcrypt = require("bcryptjs");
 const { users } = require("../models/relation");
 class UserController {
   async getUsers(req, res) {
@@ -8,15 +9,15 @@ class UserController {
     res.json(allUsers);
   }
   async createUser(req, res) {
-    let { surname, name, patronymic, role, login, password, email, photo } =
-      req.body;
+    let { surname, name, patronymic, role, login, password, email } = req.body;
+    const hashPassword = bcrypt.hashSync(password, 3);
     let newUser = await users.create({
       surname,
       name,
       patronymic,
       role,
       login,
-      password,
+      password: hashPassword,
       email,
       photo: !req.file ? "" : `/${req.file.path.replaceAll("\\", "/")}`,
       departmentId: 1,
@@ -25,22 +26,41 @@ class UserController {
   }
   async updateUser(req, res) {
     let { surname, name, patronymic, role, login, email, id } = req.body;
-    await users.update(
-      {
-        surname: surname,
-        name: name,
-        patronymic: patronymic,
-        login: login,
-        email: email,
-        role: role,
-        photo: !req.file ? "" : `/${req.file.path.replaceAll("\\", "/")}`,
-      },
-      {
-        where: {
-          userId: id,
+    if (req.file) {
+      await users.update(
+        {
+          surname: surname,
+          name: name,
+          patronymic: patronymic,
+          login: login,
+          email: email,
+          role: role,
+          photo: `/${req.file.path.replaceAll("\\", "/")}`,
         },
-      }
-    );
+        {
+          where: {
+            userId: id,
+          },
+        }
+      );
+    } else {
+      await users.update(
+        {
+          surname: surname,
+          name: name,
+          patronymic: patronymic,
+          login: login,
+          email: email,
+          role: role,
+        },
+        {
+          where: {
+            userId: id,
+          },
+        }
+      );
+    }
+
     const updatingData = await users.findAll({ raw: true });
     return res.json(updatingData);
   }
