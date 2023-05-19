@@ -18,7 +18,7 @@ export default function Avatar() {
                     <span>IT отдел 70-52-90</span>
                 </div>
                 <div className="card-body">
-                    <Link to="/adminpanel">
+                    <Link to="/adminpanel/auth">
                         <i className="icon icon-cross"></i>
                         <span className="exit-link">Выход</span>
                     </Link>

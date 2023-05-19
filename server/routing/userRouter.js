@@ -7,5 +7,6 @@ router.get("/user", userController.getUsers); // Получить
 router.post("/user", upload.single("photo"), userController.createUser); // Создать
 router.patch("/user", upload.single("photo"), userController.updateUser); // Изменить
 router.delete("/user", userController.deleteUser); // Удалить
+router.post("/auth", userController.loginUser);
 
 module.exports = router;

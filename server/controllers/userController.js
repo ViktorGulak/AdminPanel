@@ -1,5 +1,13 @@
 const bcrypt = require("bcryptjs");
 const { users } = require("../models/relation");
+const jwt = require("jsonwebtoken");
+const generateJwt = (currentUserId, currentUserRole, currentUserDepartment) =>
+  jwt.sign(
+    { currentUserId, currentUserRole, currentUserDepartment },
+    process.env.SECRET_JWT_KEY,
+    { expiresIn: "24h" }
+  );
+
 class UserController {
   async getUsers(req, res) {
     const { ID } = req.query;
@@ -60,9 +68,30 @@ class UserController {
         }
       );
     }
-
     const updatingData = await users.findAll({ raw: true });
     return res.json(updatingData);
+  }
+  async loginUser(req, res) {
+    const { login, password } = req.body;
+    const authorizedUser = await users.findAll({
+      raw: true,
+      attributes: ["userId", "role", "departmentId"],
+      where: {
+        login: login,
+        password: password,
+      },
+    });
+    //let comparePassword = bcrypt.compareSync(password, authorizedUser.password);
+    //if (!comparePassword) {
+    //return res.json({ message: "Такого пользователя не существует" });
+    //}
+    console.log(authorizedUser[0].userId);
+    const token = generateJwt(
+      authorizedUser[0].userId,
+      authorizedUser[0].role,
+      authorizedUser[0].departmentId
+    );
+    return res.json({ token });
   }
   async deleteUser(req, res) {
     const { ID } = req.body;

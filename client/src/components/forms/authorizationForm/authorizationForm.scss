@@ -36,13 +36,13 @@
         right: 0px;
         bottom: -65px;
         font-size: .8rem;
-        background: $blue;
-        border-color: $blue;
+        background: $blue !important;
+        border-color: $blue !important;
         transition: 350ms;
         width: 100px;
 
         &:hover{
-            background: $darkBlue;
+            background: $darkBlue !important;
         }
     }    
 }    

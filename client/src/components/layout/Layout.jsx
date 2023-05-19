@@ -8,7 +8,7 @@ export default function Layout() {
   const {pathname} = useLocation();
   const isAdminApp = pathname === "/" || 
     pathname === "/onlinereceipt" ||
-    pathname === "/adminpanel"
+    pathname === "/adminpanel/auth"
     ? false : true
 
   return (
